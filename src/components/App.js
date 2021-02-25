@@ -4,52 +4,9 @@ import { Container, Nav, Button } from "./styled-components";
 import UserImg from "../assets/images/avatar.svg";
 import PieChart from "../assets/images/piechart-sectors.jpg";
 import LineChart from "../assets/images/line-chart.jpg";
+import { onClickPlay, onClickPause, onClickStop } from "./handlers";
 class App extends Component {
-  componentDidMount() {
-    if ("speechSynthesis" in window) {
-      let synth = speechSynthesis;
-      let flag = false;
-
-      /* references to the buttons */
-      let playEle = document.querySelector("#play");
-      let pauseEle = document.querySelector("#pause");
-      let stopEle = document.querySelector("#stop");
-
-      /* click event handlers for the buttons */
-      playEle.addEventListener("click", onClickPlay);
-      pauseEle.addEventListener("click", onClickPause);
-      stopEle.addEventListener("click", onClickStop);
-
-      function onClickPlay() {
-        if (!flag) {
-          flag = true;
-          const utterance = new SpeechSynthesisUtterance(
-            document.querySelector("#article").textContent
-          );
-          utterance.voice = synth.getVoices()[0];
-          utterance.onend = function() {
-            flag = false;
-          };
-          synth.speak(utterance);
-        }
-        if (synth.paused) {
-          /* unpause/resume narration */
-          synth.resume();
-        }
-      }
-      function onClickPause() {
-        if (synth.speaking && !synth.paused) {
-          synth.pause();
-        }
-      }
-      function onClickStop() {
-        if (synth.speaking) {
-          flag = false;
-          synth.cancel();
-        }
-      }
-    }
-  }
+  componentDidMount() {}
 
   render() {
     return (
@@ -112,13 +69,13 @@ class App extends Component {
                     7%. (All estimate values).
                   </span>
                   <div>
-                    <Button primary id="play">
+                    <Button primary id="play" onClick={onClickPlay}>
                       Play
                     </Button>
-                    <Button primary id="pause">
+                    <Button primary id="pause" onClick={onClickPause}>
                       Pause
                     </Button>
-                    <Button primary id="stop">
+                    <Button primary id="stop" onClick={onClickStop}>
                       Stop
                     </Button>
                   </div>
