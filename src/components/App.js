@@ -30,7 +30,7 @@ class App extends Component {
           </Container>
           <Container className="navbar-nav ml-auto">
             <Container className="user-detail-section">
-              <span className="pr-2">Hi, Disabled Person</span>
+              <span className="pr-2">Hi, User</span>
               <span className="img-container">
                 <img src={UserImg} alt="user" />
               </span>
