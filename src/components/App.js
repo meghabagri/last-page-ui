@@ -5,8 +5,20 @@ import UserImg from "../assets/images/avatar.svg";
 import PieChart from "../assets/images/piechart-sectors.jpg";
 import LineChart from "../assets/images/line-chart.jpg";
 import { onClickPlay, onClickPause, onClickStop } from "./handlers";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import { redirectRoutes } from "../router";
 class App extends Component {
-  componentDidMount() {}
+  componentDidMount() {
+    const redirectRouteComponents = redirectRoutes.map(route => (
+      <Route
+        key={route.path}
+        path={route.path}
+        exact={route.exact}
+        render={route.render}
+      />
+    ));
+    const App = () => <Router>{redirectRouteComponents}</Router>;
+  }
 
   render() {
     return (
